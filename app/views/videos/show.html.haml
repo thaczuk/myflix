@@ -1,1 +1,21 @@
-show.html.haml
+%section.content.clearfix
+  %article.video
+    .container
+      .row
+      .video_large_cover.span.7.offset1
+        %img{:src => "/tmp/monk_large.jpg"}/
+      .video_info.span3
+        %header
+          %h3
+            = @video.title
+          %span
+            Rating: 4.5/5.0
+        %hr
+        %p
+          Description
+        .actions
+          %a.btn.btn-primary{:href => ""} Watch Now
+          %a.btn{:href => ""} + My Queue
+          .video.span2/
+
+

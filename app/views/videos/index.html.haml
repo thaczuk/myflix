@@ -1,7 +1,10 @@
-.video_category
-  %h2= link_to "TV Comedies:"
-  .videos.row
-  - @videos.each do |video|
-    .video.span2
-      = link_to "/videos/#{video.id}", @video do
-        %img(src="#{video.small_cover_url}")
+%section.content.clearfix
+  %article.video_category
+    %header
+      %h3 TV Comedies
+    .videos.row
+      - @videos.each do |video|
+        .video.span2
+          = link_to "/videos/#{video.id}", @video do
+            %img(src="#{video.small_cover_url}")
+
