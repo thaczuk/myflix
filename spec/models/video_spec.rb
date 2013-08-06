@@ -12,5 +12,7 @@ describe Video do
   end
 
   it { should have_one(:category) }
+  it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:description) }
 
 end
