@@ -5,4 +5,4 @@
       %i "No such video"
     - else
     - @videos.each do |video|
-      =link_to image_tag(video.small_cover_url)
+      =link_to image_tag("/#{video.small_cover_url}")

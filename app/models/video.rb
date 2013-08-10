@@ -9,4 +9,5 @@ class Video < ActiveRecord::Base
       where("title LIKE ?", "%#{ search_term}%")
     end
   end
+
 end
