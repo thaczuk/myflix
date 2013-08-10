@@ -1,0 +1,8 @@
+%article.video-category
+  %header
+    %h2 Results
+    -if @videos.blank?
+      %i "No such video"
+    - else
+    - @videos.each do |video|
+      =link_to image_tag(video.small_cover_url)
