@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'haml-rails'
 gem 'bootstrap-sass'
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bootstrap_form'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

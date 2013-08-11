@@ -1,0 +1,14 @@
+%section.content.clearfix
+  %section.register.container
+    .row
+      .span10.offset1
+        =bootstrap_form_for @user, html: {class: 'form-horizontal' }, help: :block do |f|
+          %header
+            %h1 Sign in
+          %fieldset
+            = f.alert_message " Please check your errors."
+            = f.text_field :email, :placeholder => 'me@example.com', class: "span3"
+            = f.password_field :password, class: "span3"
+          %fieldset.actions.control-group
+            .controls
+              %input(type="submit" value="Sign in")
