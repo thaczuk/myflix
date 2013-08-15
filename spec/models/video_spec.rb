@@ -23,4 +23,18 @@ describe Video do
       expect(Video.search_by_title( 'South' )).to include( @video, pole )
     end
   end
+
+  describe "#average_ratings" do
+    let(:user) {Fabricate(:user)}
+    let(:video) {Fabricate(:video)}
+
+    it "should return 0 if there is no review" do
+      expect(video.average_ratings).to eq 0
+    end
+    it "should return the average review if there are any reviews" do
+      video.reviews << Fabricate(:review, body: "aaa", rating: 2)
+      video.reviews << Fabricate(:review, body: "aaa", rating: 5)
+      expect(video.average_ratings).to eq(3.5)
+    end
+  end
 end

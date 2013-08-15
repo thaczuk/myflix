@@ -31,6 +31,13 @@ describe VideosController do
         get :show, id: video
         response.should render_template :show
       end
+
+      it "sets @reviews" do
+        one_review = Fabricate( :review, video: video )
+        another_review = Fabricate( :review, video: video )
+        get :show, id: video
+        assigns(:reviews).should =~ [ one_review, another_review ]
+      end
     end
   end
 
