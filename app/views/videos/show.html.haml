@@ -21,12 +21,12 @@
 %section.reviews.container
   .row
     .span10.offset1
-      = bootstrap_form_for([@video, @review], html: {class: 'form-vertical'}) do |f|
+      = bootstrap_form_for([@video, Review.new], html: {class: 'form-vertical'}) do |f|
         %fieldset
           %label Rate this video
           = f.select :rating, options_for_video_reviews
           = f.alert_message "Please fix the errors below"
-          = f.text_area :body, label: 'Write review', rows: 3, class: 'span5'
+          = f.text_area :body, label: 'Write review', rows: 3, class: 'span6'
           %fieldset.actions.clearfix
             = f.submit 'Submit', disable_with: 'Saving...', class: 'btn'
             %a(href="") Cancel

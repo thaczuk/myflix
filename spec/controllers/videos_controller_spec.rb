@@ -17,7 +17,7 @@ describe VideosController do
 
       it "redirects to root path" do
         get :show, id: video
-        response.should redirect_to root_path
+        response.should redirect_to login_path
       end
     end
 
@@ -47,7 +47,7 @@ describe VideosController do
       it "redirect to root" do
         session[:user_id] = nil
         post :search, search_term: video.title
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to login_path
       end
     end
 

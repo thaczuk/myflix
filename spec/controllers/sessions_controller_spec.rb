@@ -16,7 +16,7 @@ describe SessionsController do
 
     it "redirect_to to login path" do
       delete :destroy
-      response.should redirect_to root_path
+      response.should redirect_to login_path
     end
   end
 
