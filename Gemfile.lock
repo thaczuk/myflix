@@ -30,6 +30,9 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (0.9.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     bootstrap_form (1.0.0)
@@ -142,6 +145,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
+  better_errors
   bootstrap-sass
   bootstrap_form
   coffee-rails (~> 3.2.1)

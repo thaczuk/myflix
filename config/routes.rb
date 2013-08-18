@@ -1,14 +1,15 @@
 Myflix::Application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
-  get '/login',     to: 'sessions#new'
-  post '/login',   to: 'sessions#create'
-  get '/logout',   to: "sessions#destroy"
-  get 'sign_in',   :to => 'sessions#new'
+  get '/login',          to: 'sessions#new'
+  post '/login',        to: 'sessions#create'
+  get '/logout',        to: "sessions#destroy"
+  get 'sign_in',         to: => 'sessions#new'
 
-  get 'register',  :to => 'users#new'
+  get 'register',       to: => 'users#new'
   resources :users, only: [:new, :create]
 
-  get '/home',    :to => 'videos#index'
+  get '/home',         to: => 'videos#index'
+  get '/my-queue'   to: => 'queue_videos#index'
 
   resources :videos, only: [ :index, :show ] do
     collection do
