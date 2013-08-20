@@ -18,4 +18,26 @@
           %a.btn{:href => ""} + My Queue
           .video.span2/
 
-
+%section.reviews.container
+  .row
+    .span10.offset1
+      = bootstrap_form_for([@video, Review.new], html: {class: 'form-vertical'}) do |f|
+        %fieldset
+          %label Rate this video
+          = f.select :rating, options_for_video_reviews
+          = f.alert_message "Please fix the errors below"
+          = f.text_area :body, label: 'Write review', rows: 3, class: 'span6'
+          %fieldset.actions.clearfix
+            = f.submit 'Submit', disable_with: 'Saving...', class: 'btn'
+            %a(href="") Cancel
+      %header
+        %h3 User Reviews ( #{@video.reviews.count} )
+      %ul
+        - @video.recent_reviews.each do |review|
+          %article.review
+            %li.row
+              .span2
+                %span Rating: #{ review.rating } / 5
+                %p by #{ review.user.full_name }
+              .span8
+                %p= review.body

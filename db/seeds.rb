@@ -41,7 +41,15 @@ Video.create(title: "Family Guy4",
                     small_cover_url: "tmp/futurama.jpg",
                     large_cover_url: "tmp/monk_large.jpg", category: comedies)
 
-Video.create(title: "Monk",
+monk = Video.create(title: "Monk",
                     description: "paranoid detective",
                     small_cover_url: "tmp/monk.jpg",
                     large_cover_url: "tmp/monk_large.jpg", category: dramas)
+
+kevin = User.create(full_name: "Greg Thaczuk", password: "greg", email: "thaczuk@gmail.com")
+
+kevin = User.create(full_name: "Kevin Wang", password: "password", email: "kevin@example.com")
+
+Review.create(user: kevin, video: monk, rating: 5, body: "This is a really good movie!")
+
+Review.create(user: kevin, video: monk, rating: 2, body: "This is a horrible movie!")

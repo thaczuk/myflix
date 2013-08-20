@@ -6,6 +6,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'bootstrap_form'
 
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -16,10 +17,13 @@ group :development do
   gem 'sqlite3'
   gem 'pry'
   gem 'pry-nav'
+  gem "better_errors"
 end
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :test do
