@@ -11,6 +11,12 @@ before_filter   :require_user
     redirect_to my_queue_path
   end
 
+  def destroy
+    queue_video = QueueVideo.find(params[:id])
+    queue_video.destroy if current_user.queue_videos.include?(queue_video)
+    redirect_to my_queue_path
+  end
+
   private
 
   def queue_video(video)
