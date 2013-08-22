@@ -17,7 +17,7 @@
           - @queue_videos.each do |queue_video|
             %tr
               %td
-                %input(type="text" value="1")
+                = queue_video.position
               %td
                 = link_to queue_video.video_title, queue_video.video
               %td
