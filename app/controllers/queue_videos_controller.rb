@@ -47,7 +47,7 @@ before_filter   :require_user
     ActiveRecord::Base.transaction do
       params[:queue_videos].each do |queue_video_data|
       queue_video = QueueVideo.find(queue_video_data["id"])
-      queue_video.update_attributes!(position: queue_video_data["position"]) if queue_video.user == current_user
+      queue_video.update_attributes!(position: queue_video_data["position"], rating: queue_video_data["rating"]) if queue_video.user == current_user
       end
     end
   end
