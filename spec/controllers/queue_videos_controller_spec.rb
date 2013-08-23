@@ -93,6 +93,15 @@ describe QueueVideosController do
         expect(QueueVideo.count).to eq(0)
       end
 
+      it "normalizes the remaining queue items" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        delete :destroy, id: queue_video1.id
+        expect(QueueVideo.first.position).to eq(1)
+      end
+
       it "does not delete the queued video of a different user" do
         alice = Fabricate(:user)
         bob = Fabricate(:user)
@@ -160,15 +169,33 @@ describe QueueVideosController do
       end
 
       it "does not change the queue videos" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 3}, {id: queue_video2.id, position: 2.1}]
+        expect(queue_video1.reload.position).to eq(1)
       end
 
     end
 
     context "with unauthenticated user" do
+      it "redirects to the sign in path" do
+         post :update_queue, queue_videos: [{id: 2, position: 3}, {id: 5, position: 2}]
+         expect(response).to redirect_to login_path
+      end
     end
 
     context "with queue videos not belonging to the current user" do
-      it "does not change pposition of other's queue videos" do
+      it "does not change position of other's queue videos" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        bob = Fabricate(:user)
+        queue_video1 = Fabricate(:queue_video, user: bob, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 3}, {id: queue_video2.id, position: 2}]
+        expect(queue_video1.reload.position).to eq(1)
+
       end
     end
   end
