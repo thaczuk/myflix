@@ -110,4 +110,67 @@ describe QueueVideosController do
       end
     end
   end
+  describe 'POST update_queue' do
+    context "with valid input" do
+      it "redirects to the my queue page" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 2}, {id: queue_video2.id, position: 1}]
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "reorders the queue videos" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 2}, {id: queue_video2.id, position: 1}]
+        expect(alice.queue_videos).to eq([queue_video2, queue_video1])
+      end
+
+      it "normalizes the position numbers" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 3}, {id: queue_video2.id, position: 2}]
+        expect(alice.queue_videos.map(&:position)).to eq([1, 2])
+      end
+    end
+
+    context "with invalid input" do
+      it "redirect to my_queue path" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 2.8}, {id: queue_video2.id, position: 1}]
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "sets the error flash with eror message" do
+        alice = Fabricate(:user)
+        session[:user_id] = alice.id
+        queue_video1 = Fabricate(:queue_video, user: alice, position: 1)
+        queue_video2 = Fabricate(:queue_video, user: alice, position: 2)
+        post :update_queue, queue_videos: [{id: queue_video1.id, position: 2.8}, {id: queue_video2.id, position: 1}]
+        expect(flash[:error]).to be_present
+      end
+
+      it "does not change the queue videos" do
+      end
+
+    end
+
+    context "with unauthenticated user" do
+    end
+
+    context "with queue videos not belonging to the current user" do
+      it "does not change pposition of other's queue videos" do
+      end
+    end
+  end
+
 end
