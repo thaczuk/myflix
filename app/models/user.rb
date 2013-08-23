@@ -5,4 +5,10 @@ class User < ActiveRecord::Base
 
   validates :email, :full_name, :password, :presence =>true
   validates_uniqueness_of :email
+
+  def normalize_queue_video_positions
+    queue_videos.each_with_index do |queue_video, index|
+      queue_video.update_attributes(position: index + 1)
+    end
+  end
 end

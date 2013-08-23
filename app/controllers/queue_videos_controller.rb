@@ -15,14 +15,14 @@ before_filter   :require_user
     queue_video = QueueVideo.find(params[:id])
     queue_video.destroy if current_user.queue_videos.include?(queue_video)
     flash[:notice] = "Video removed from your queue"
-    normalize_queue_video_positions
+    current_user.normalize_queue_video_positions
     redirect_to my_queue_path
   end
 
     def update_queue
       begin
         update_queue_items
-        normalize_queue_video_positions
+        current_user.normalize_queue_video_positions
       rescue ActiveRecord::RecordInvalid
         flash[:error] = "Invalid position numbers"
       end
@@ -49,12 +49,6 @@ before_filter   :require_user
       queue_video = QueueVideo.find(queue_video_data["id"])
       queue_video.update_attributes!(position: queue_video_data["position"]) if queue_video.user == current_user
       end
-    end
-  end
-
-  def normalize_queue_video_positions
-    current_user.queue_videos.each_with_index do |queue_video, index|
-      queue_video.update_attributes(position: index + 1)
     end
   end
 end
