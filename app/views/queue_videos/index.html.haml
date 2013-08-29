@@ -4,30 +4,31 @@
       %article
         %header
           %h2 My Queue
-        %table.table
-          %thead
-            %tr
-              %th(width="10%") List Order
-              %th(width="30%") Video Title
-              %th(width="10%") Play
-              %th(width="20%") Rating
-              %th(width="15%") Genre
-              %th(width="15%") Remove
-          %tbody
-          - @queue_videos.each do |queue_video|
-            %tr
-              %td
-                = queue_video.position
-              %td
-                = link_to queue_video.video_title, queue_video.video
-              %td
-                = button_to "Play", nil, class: "btn"
-              %td
-                = queue_video.rating
-              %td
-                = link_to queue_video.category_name, queue_video.category
-              %td
-                = link_to queue_video, method: :delete do
-                  %i.icon-remove
-        = button_to "Update Instant Queue", nil, class: "btn"
-
+        = form_tag update_queue_path do
+          %table.table
+            %thead
+              %tr
+                %th(width="10%") List Order
+                %th(width="30%") Video Title
+                %th(width="10%") Play
+                %th(width="20%") Rating
+                %th(width="15%") Genre
+                %th(width="15%") Remove
+            %tbody
+            - @queue_videos.each do |queue_video|
+              %tr
+                %td
+                  = hidden_field_tag "queue_videos[][id]", queue_video.id
+                  = text_field_tag "queue_videos[][position]", queue_video.position
+                %td
+                  = link_to queue_video.video_title, queue_video.video
+                %td
+                  = button_to "Play", nil, class: "btn"
+                %td
+                  = select_tag "queue_videos[][rating]", options_for_video_reviews(queue_video.rating), include_blank: true
+                %td
+                  = link_to queue_video.category_name, queue_video.category
+                %td
+                  = link_to queue_video, method: :delete do
+                    %i.icon-remove
+          = submit_tag "Update Instant Queue", class: "btn"
