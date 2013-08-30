@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -28,6 +28,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :production do
