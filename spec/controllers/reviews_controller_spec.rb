@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'spec_helper'
-
 describe ReviewsController do
   describe "POST create" do
     let(:video) { Fabricate(:video) }
@@ -48,9 +46,8 @@ describe ReviewsController do
       end
     end
     context "with unauthenticated users" do
-      it "redirects to the sign in path" do
-        post :create, review: Fabricate.attributes_for(:review), video_id: video.id
-        expect(response).to redirect_to login_path
+      it_behaves_like "requires sign in" do
+        let(:action) { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
       end
     end
   end

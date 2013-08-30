@@ -1,23 +1,19 @@
 require 'spec_helper'
 
 describe VideosController do
-  before {
-    user = Fabricate(:user)
-    session[:user_id] = user.id
-  }
+  before { set_current_user }
 
   describe "GET show" do
     let(:video) { Fabricate(:video) }
     context "When user is not logged in" do
-      before { session[:user_id] = nil }
+      before { clear_current_user }
       it "assigns the requested nil to the @video" do
         get :show, id: video
         assigns(:video).should == nil
       end
 
-      it "redirects to root path" do
-        get :show, id: video
-        response.should redirect_to login_path
+      it_behaves_like "requires sign in" do
+        let(:action) { get :show, id: video }
       end
     end
 
@@ -44,10 +40,8 @@ describe VideosController do
     describe "POST search" do
     let(:video) { Fabricate(:video) }
     context "When user is not logged in" do
-      it "redirect to root" do
-        session[:user_id] = nil
-        post :search, search_term: video.title
-        expect(response).to redirect_to login_path
+      it_behaves_like "requires sign in" do
+        let(:action) { post :search, search_term: video.title }
       end
     end
 
