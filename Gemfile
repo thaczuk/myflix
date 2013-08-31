@@ -24,11 +24,13 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
+  gem 'pry'
 end
 
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do
