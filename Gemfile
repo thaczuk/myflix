@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -24,10 +24,13 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
+  gem 'pry'
 end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do

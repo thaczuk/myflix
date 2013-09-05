@@ -14,9 +14,8 @@ describe SessionsController do
       session[:user_id].should be_nil
     end
 
-    it "redirect_to to login path" do
-      delete :destroy
-      response.should redirect_to login_path
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy }
     end
   end
 
@@ -40,9 +39,9 @@ describe SessionsController do
         post :create, { password: "greg" }
         session[:user_id].should be_nil
       end
-      it "redirects to the login page" do
-        post :create, {password: "greg" }
-        response.should redirect_to login_path
+
+      it_behaves_like "requires sign in" do
+        let(:action) { post :create, { password: "greg" } }
       end
     end
 
@@ -51,21 +50,10 @@ describe SessionsController do
         post :create, { password: "pass", email: "greg@example"}
         session[:user_id].should be_nil
       end
-      it "should redirect_to to login page" do
-        post :create, { password: "pass", email: "greg@example"}
-        response.should redirect_to login_path
+
+      it_behaves_like "requires sign in" do
+        let(:action) { post :create, { password: "pass", email: "greg@example"} }
       end
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
