@@ -1,0 +1,36 @@
+%section.user.container
+  .row
+    .span10.offset1
+      %article
+        %header
+          %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase.downcase)}?s=40")
+          %h2 #{ @user.full_name }'s video collections (#{ @user.queue_videos.count })
+          %button.btn Follow
+        %table.table
+          %thead
+            %tr
+              %th(width="30%") Video Title
+              %th(width="15%") Genre
+          %tbody
+            -@user.queue_videos.each do |queue_video|
+              %tr
+                %td
+                  = link_to queue_video.video.title, queue_video.video
+                %td
+                  = link_to queue_video.category_name, queue_video.category
+
+%section.user_reviews.container
+  .row
+    .span10.offset1
+      %header
+        %h3 #{@user.full_name}'s Reviews (#{ @user.reviews.count })
+      %ul
+        - @user.reviews.each do |review|
+          %article.review
+            %li.row
+              .span2
+                %p
+                  = link_to review.video.title, review.video
+                %span Rating: #{ review.rating } / 5
+              .span8
+                %p= review.body
