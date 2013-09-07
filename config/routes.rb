@@ -6,10 +6,12 @@ Myflix::Application.routes.draw do
   get 'sign_in',         to: 'sessions#new'
 
   get 'register',       to:  'users#new'
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   get '/home',         to:  'videos#index'
   get 'my_queue',    to: "queue_videos#index"
+  get 'people',         to: "relationships#index"
+  resources :relationships, only: [:create, :destroy]
 
   resources :videos, only: [ :index, :show ] do
     collection do
