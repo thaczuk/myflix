@@ -32,6 +32,23 @@ describe "POST #create" do
       end
     end
 
+    context "email sending" do
+      it "sends out the email" do
+        post :create, user: {full_name: 'Greg Thaczuk', password: 'pass', email: "greg@example.com"}
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+      it "sends to the right recipient" do
+        post :create, user: {full_name: 'Greg Thaczuk', password: 'pass', email: "greg@example.com"}
+        message = ActionMailer::Base.deliveries.last
+        message.to.should == ["greg@example.com"]
+      end
+      it "has the right content" do
+        post :create, user: {full_name: 'Greg Thaczuk', password: 'pass', email: "greg@example.com"}
+        message = ActionMailer::Base.deliveries.last
+        message.body.should include("Welcome to MyFlix")
+      end
+    end
+
     context "with invalid user inputs" do
       it "does not create the user" do
         post :create, user: {password: 'pass', email: "greg@example.com"}
@@ -58,4 +75,3 @@ describe "POST #create" do
     end
   end
 end
-
