@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.create(params[:user])
 
     if @user.save
+      AppMailer.send_welcome_email(@user).deliver
       flash[:success] = "You are registered. Please sign in."
       redirect_to sign_in_path
     else
