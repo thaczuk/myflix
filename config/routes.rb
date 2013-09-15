@@ -31,5 +31,7 @@ Myflix::Application.routes.draw do
   resources :queue_videos, only: [:create, :destroy]
   post 'update_queue', to: 'queue_videos#update_queue'
 
+  resources :invitations, only: [:new, :create]
+
   root to: 'pages#front'
 end
