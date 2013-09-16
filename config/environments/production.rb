@@ -65,14 +65,27 @@ Myflix::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { host: 'fast-cliffs-8919.herokuapp.com' }
+  # config.action_mailer.default_url_options = { host: 'fast-cliffs-8919.herokuapp.com' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:               'smtp.gmail.com',
+  #   port:                     587,
+  #   domain:               'http://fast-cliffs-8919.herokuapp.com/',
+  #   user_name:           ENV['GMAIL_USERNAME'],
+  #   password:             ENV['GMAIL_PASSWORD'],
+  #   authentication:      'plain',
+  #   enable_starttls_auto: true  }
+
+  config.action_mailer.default_url_options = { host: 'myflix-thaczuk.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
-    address:               'smtp.gmail.com',
-    port:                     587,
-    domain:               'http://fast-cliffs-8919.herokuapp.com/',
-    user_name:           ENV['GMAIL_USERNAME'],
-    password:             ENV['GMAIL_PASSWORD'],
-    authentication:      'plain',
-    enable_starttls_auto: true  }
+     :authentication => :plain,
+     :address           => "smtp.mailgun.org",
+     :port                 => 587,
+     :domain            => "app18088691.mailgun.org",
+     :user_name       => ENV['MAILGUN_SMTP_LOGIN'],
+     :password         => ENV['MAILGUN_SMTP_PASSWORD']
+  }
   end

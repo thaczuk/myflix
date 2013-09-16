@@ -1,6 +1,7 @@
 !!! 5
 %html(lang="en-US")
- %body
-  %p You are invited by #{@invitation.inviter.full_name} to join MyFlix!
-  %p= @invitation.message
-  %p= link_to "Accept this invitation", "#"
+  %body
+    %p This is a test
+    %p You are invited by #{@invitation.inviter.full_name} to join Myflix
+    %p= @invitation.message
+    %p= link_to "Accept this invitation", "#"

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe InvitationsController do
   describe "GET new" do
-    it "sets @invitation to a a new invitation" do
+    it "sets @invitation to a new invitation" do
       set_current_user
       get :new
       expect(assigns(:invitation)).to be_new_record
