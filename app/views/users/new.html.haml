@@ -6,10 +6,10 @@
           %h1 Register
         %fieldset
           = f.alert_message " Please check your errors."
-          = f.text_field :full_name, class: "span3"
           = f.text_field :email, :placeholder => 'me@example.com', class: "span3"
           = f.password_field :password, class: "span3"
-
+          = f.text_field :full_name, class: "span3"
+          = hidden_field_tag :invitation_token, @invitation_token
         %fieldset.actions.control-group
           .controls
             %input(type="submit" value="Sign Up")
