@@ -2,46 +2,89 @@ require 'spec_helper'
 
 describe Admin::VideosController do
   describe "GET #new" do
-    let(:bob) { Fabricate(:admin) }
-
-    context "admin user" do
-      before(:each) do
-        set_current_user(bob)
-        get :new
-      end
-
-      it "assigns the @video to a new video" do
-        assigns(:video).should be_new_record
-        assigns(:video).should be_instance_of(Video)
-      end
-
-      it "should render the :new template" do
-       response.should render_template :new
-      end
+    it_behaves_like "requires sign in" do
+      let(:action) { get :new }
     end
 
-    context "non admin" do
-      before(:each) do
-        set_current_user(bob)
-        get :new
-      end
+    it_behaves_like "requires admin" do
+      let(:action) { get :new }
+    end
 
-      it "should redirect to home page" do
-       get :new
-       response.should render_template :new
-      end
+    it "sets the @video to a new video" do
+      set_current_admin
+      get :new
+      expect(assigns(:video)).to be_instance_of Video
+      expect(assigns(:video)).to be_new_record
+    end
+
+    it "sets the flash error message for regular users" do
+      set_current_user
+      get :new
+      expect(flash[:error]).to be_present
     end
   end
 
-  # describe "Post #create" do
-  #   context "admins" do
-  #     before { set_current_user( Fabricate(:admin)) }
+  describe "POST create" do
+    it_behaves_like "requires sign in" do
+      let(:action) { get :new }
+    end
 
-  #     it "creates the video" do
-  #       drama = Fabricate(:category)
-  #       post :create, video: {name: "Monk", category_id: drama.id, description: "Awesome series!" }
-  #       monk = Video.find_by_name("Monk").should be_present
-  #     end
-  #   end
-  # end
+    it_behaves_like "requires admin" do
+      let(:action) { post :create }
+    end
+
+    context "with valid input" do
+      it "redirects to the add new video page" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { title: "Monk", category_id: category.id, description: "good show!" }
+        expect(response).to redirect_to new_admin_video_path
+
+      end
+
+      it "creates a video" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { title: "Monk", category_id: category.id, description: "good show!" }
+        expect(category.videos.count).to eq(1)
+      end
+
+      it "sets the flash success message" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { title: "Monk", category_id: category.id, description: "good show!" }
+        expect(category.videos.count).to be_present
+      end
+    end
+
+    context "with invalid input" do
+      it "does not create a video" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "good show!" }
+        expect(category.videos.count).to eq(0)
+      end
+
+      it "renders the :new template" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "good show!" }
+        expect(response).to render_template :new
+      end
+
+      it "sets the @video variable" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "good show!" }
+        expect(assigns(:video)).to be_present
+      end
+
+      it "sets the flash error message" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "good show!" }
+        expect(flash[:error]).to be_present
+      end
+    end
+  end
 end

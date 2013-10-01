@@ -6,7 +6,7 @@ Myflix::Application.routes.draw do
   get 'sign_in',         to: 'sessions#new'
 
   namespace :admin do
-    resources :videos, only:[:new, :index]
+    resources :videos, only:[:new, :create]
   end
 
   get 'register',       to:  'users#new'
