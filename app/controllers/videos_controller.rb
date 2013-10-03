@@ -1,4 +1,4 @@
-class VideosController < ApplicationController
+class VideosController < AuthenticatedController
   before_filter :require_user
 
   def index
