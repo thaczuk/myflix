@@ -17,6 +17,7 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |config|
+  config.before(:each) { ActionMailer::Base.deliveries.clear }
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
