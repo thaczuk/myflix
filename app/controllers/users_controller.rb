@@ -6,21 +6,25 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params[:user])
-
-    if @user.save
-      handle_invitation
-      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      Stripe::Charge.create(
+    @user = User.new(params[:user])
+    if @user.valid?
+      charge = StripeWrapper::Charge.create(
        :amount => 999,
-       :currency => "cad",
-       :card => params[:stripeToken], # obtained with Stripe.js
+       :card => params[:stripeToken],
        :description => "Sign up fee for #{ @user.email }"
        )
-      AppMailer.send_welcome_email(@user).deliver
-      flash[:success] = "You are registered. Please sign in."
-      redirect_to sign_in_path
+      if charge.successful?
+        @user.save
+        handle_invitation
+        AppMailer.send_welcome_email(@user).deliver
+        flash[:success] = "You are registered. Please sign in."
+        redirect_to sign_in_path
+      else
+        flash[:error] = charge.error_message
+        render :new
+      end
     else
+      flash[:error] = "Invalid user information. Please check the errors below."
       render :new
     end
   end
