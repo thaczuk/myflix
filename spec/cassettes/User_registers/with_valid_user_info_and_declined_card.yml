@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=cad&card=tok_102hfc2Q662YjSqngPD952wy&description=Sign%20up%20fee%20for%20joe%40example.com
+      string: card=tok_102l9b2Q662YjSqne8Obt8uP&email=joe%40example.com&plan=myflix
     headers:
       Accept:
       - ! '*/*; q=0.5, application/xml'
@@ -19,10 +19,10 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - ! '{"bindings_version":"1.8.7","lang":"ruby","lang_version":"1.9.3 p194 (2012-04-20)","platform":"x86_64-darwin12.4.0","publisher":"stripe","uname":"Darwin
-        Gregory-Thaczuks-MacBook.local 12.5.0 Darwin Kernel Version 12.5.0: Mon Jul
-        29 16:33:49 PDT 2013; root:xnu-2050.48.11~1/RELEASE_X86_64 x86_64"}'
+        Gregory-Thaczuks-MacBook.local 12.5.0 Darwin Kernel Version 12.5.0: Sun Sep
+        29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
       Content-Length:
-      - '111'
+      - '69'
   response:
     status:
       code: 402
@@ -31,26 +31,25 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 06 Oct 2013 12:05:00 GMT
+      - Tue, 15 Oct 2013 19:15:27 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
-      - '162'
+      - '117'
       Connection:
       - keep-alive
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '300'
       Access-Control-Allow-Credentials:
       - 'true'
       Cache-Control:
       - no-cache, no-store
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '300'
     body:
       encoding: US-ASCII
       string: ! "{\n  \"error\": {\n    \"message\": \"Your card was declined.\",\n
-        \   \"type\": \"card_error\",\n    \"code\": \"card_declined\",\n    \"charge\":
-        \"ch_102hfc2Q662YjSqnqnB5aFDY\"\n  }\n}\n"
+        \   \"type\": \"card_error\",\n    \"code\": \"card_declined\"\n  }\n}\n"
     http_version: 
-  recorded_at: Sun, 06 Oct 2013 12:05:00 GMT
+  recorded_at: Tue, 15 Oct 2013 19:15:27 GMT
 recorded_with: VCR 2.6.0
