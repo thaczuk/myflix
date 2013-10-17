@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/events/evt_102lAE2Q662YjSqnlk5bkL8w
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.8.7
+      Authorization:
+      - Bearer sk_test_JUomXt215Krfkf767ly4mU9J
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - ! '{"bindings_version":"1.8.7","lang":"ruby","lang_version":"1.9.3 p194 (2012-04-20)","platform":"x86_64-darwin12.4.0","publisher":"stripe","uname":"Darwin
+        Gregory-Thaczuks-MacBook.local 12.5.0 Darwin Kernel Version 12.5.0: Sun Sep
+        29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 16 Oct 2013 01:32:24 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '1420'
+      Connection:
+      - keep-alive
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"id\": \"evt_102lAE2Q662YjSqnlk5bkL8w\",\n  \"created\": 1381866877,\n
+        \ \"livemode\": false,\n  \"type\": \"charge.succeeded\",\n  \"data\": {\n
+        \   \"object\": {\n      \"id\": \"ch_102lAE2Q662YjSqn87URD0Ly\",\n      \"object\":
+        \"charge\",\n      \"created\": 1381866877,\n      \"livemode\": false,\n
+        \     \"paid\": true,\n      \"amount\": 999,\n      \"currency\": \"cad\",\n
+        \     \"refunded\": false,\n      \"card\": {\n        \"id\": \"card_102lAE2Q662YjSqnJNrPNnCd\",\n
+        \       \"object\": \"card\",\n        \"last4\": \"4242\",\n        \"type\":
+        \"Visa\",\n        \"exp_month\": 12,\n        \"exp_year\": 2013,\n        \"fingerprint\":
+        \"RIfLSrcbOjUrHlZH\",\n        \"customer\": \"cus_2lAEdcjL6SFI3V\",\n        \"country\":
+        \"US\",\n        \"name\": null,\n        \"address_line1\": null,\n        \"address_line2\":
+        null,\n        \"address_city\": null,\n        \"address_state\": null,\n
+        \       \"address_zip\": null,\n        \"address_country\": null,\n        \"cvc_check\":
+        \"pass\",\n        \"address_line1_check\": null,\n        \"address_zip_check\":
+        null\n      },\n      \"captured\": true,\n      \"refunds\": [],\n      \"balance_transaction\":
+        \"txn_102lAE2Q662YjSqnYM5GWooR\",\n      \"failure_message\": null,\n      \"failure_code\":
+        null,\n      \"amount_refunded\": 0,\n      \"customer\": \"cus_2lAEdcjL6SFI3V\",\n
+        \     \"invoice\": \"in_102lAE2Q662YjSqnL4bbvvMl\",\n      \"description\":
+        null,\n      \"dispute\": null,\n      \"metadata\": {}\n    }\n  },\n  \"object\":
+        \"event\",\n  \"pending_webhooks\": 0,\n  \"request\": \"iar_2lAEttogsK1wMX\"\n}\n"
+    http_version: 
+  recorded_at: Wed, 16 Oct 2013 01:32:24 GMT
+recorded_with: VCR 2.6.0
