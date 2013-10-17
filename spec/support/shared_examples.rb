@@ -7,7 +7,7 @@ shared_examples "requires sign in" do
 end
 
 shared_examples "requires admin" do
-  it "redirects to the  login page" do
+  it "redirects to the  home page" do
     session[:user_id] = Fabricate(:user)
     action
     expect(response).to redirect_to home_path
