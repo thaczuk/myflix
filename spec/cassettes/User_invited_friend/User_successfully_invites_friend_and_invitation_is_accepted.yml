@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=cad&card=tok_102hS12Q662YjSqnCBHwLs0q&description=Sign%20up%20fee%20for%20john%40example.com
+      string: card=tok_102l9b2Q662YjSqnVIN4C1sm&email=john%40example.com&plan=myflix
     headers:
       Accept:
       - ! '*/*; q=0.5, application/xml'
@@ -19,10 +19,10 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - ! '{"bindings_version":"1.8.7","lang":"ruby","lang_version":"1.9.3 p194 (2012-04-20)","platform":"x86_64-darwin12.4.0","publisher":"stripe","uname":"Darwin
-        Gregory-Thaczuks-MacBook.local 12.5.0 Darwin Kernel Version 12.5.0: Mon Jul
-        29 16:33:49 PDT 2013; root:xnu-2050.48.11~1/RELEASE_X86_64 x86_64"}'
+        Gregory-Thaczuks-MacBook.local 12.5.0 Darwin Kernel Version 12.5.0: Sun Sep
+        29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
       Content-Length:
-      - '112'
+      - '70'
   response:
     status:
       code: 200
@@ -31,40 +31,49 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 05 Oct 2013 22:01:25 GMT
+      - Tue, 15 Oct 2013 19:16:05 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
-      - '997'
+      - '1721'
       Connection:
       - keep-alive
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '300'
-      Access-Control-Allow-Credentials:
-      - 'true'
       Cache-Control:
       - no-cache, no-store
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '300'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
       encoding: US-ASCII
-      string: ! "{\n  \"id\": \"ch_102hS12Q662YjSqnqJXTFekK\",\n  \"object\": \"charge\",\n
-        \ \"created\": 1381010484,\n  \"livemode\": false,\n  \"paid\": true,\n  \"amount\":
-        999,\n  \"currency\": \"cad\",\n  \"refunded\": false,\n  \"card\": {\n    \"id\":
-        \"card_102hS12Q662YjSqn8XjHvlS7\",\n    \"object\": \"card\",\n    \"last4\":
-        \"4242\",\n    \"type\": \"Visa\",\n    \"exp_month\": 7,\n    \"exp_year\":
-        2016,\n    \"fingerprint\": \"RIfLSrcbOjUrHlZH\",\n    \"customer\": null,\n
-        \   \"country\": \"US\",\n    \"name\": null,\n    \"address_line1\": null,\n
-        \   \"address_line2\": null,\n    \"address_city\": null,\n    \"address_state\":
-        null,\n    \"address_zip\": null,\n    \"address_country\": null,\n    \"cvc_check\":
-        \"pass\",\n    \"address_line1_check\": null,\n    \"address_zip_check\":
-        null\n  },\n  \"captured\": true,\n  \"refunds\": [],\n  \"balance_transaction\":
-        \"txn_102hS12Q662YjSqnLPXbwlpN\",\n  \"failure_message\": null,\n  \"failure_code\":
-        null,\n  \"amount_refunded\": 0,\n  \"customer\": null,\n  \"invoice\": null,\n
-        \ \"description\": \"Sign up fee for john@example.com\",\n  \"dispute\": null,\n
-        \ \"metadata\": {}\n}\n"
+      string: ! "{\n  \"object\": \"customer\",\n  \"created\": 1381864563,\n  \"id\":
+        \"cus_2l9bBbWh1hO30E\",\n  \"livemode\": false,\n  \"description\": null,\n
+        \ \"email\": \"john@example.com\",\n  \"delinquent\": false,\n  \"metadata\":
+        {},\n  \"subscription\": {\n    \"id\": \"su_102l9b2Q662YjSqnnSwoATH8\",\n
+        \   \"plan\": {\n      \"interval\": \"month\",\n      \"name\": \"myflix\",\n
+        \     \"amount\": 999,\n      \"currency\": \"cad\",\n      \"id\": \"myflix\",\n
+        \     \"object\": \"plan\",\n      \"livemode\": false,\n      \"interval_count\":
+        1,\n      \"trial_period_days\": null\n    },\n    \"object\": \"subscription\",\n
+        \   \"start\": 1381864563,\n    \"status\": \"active\",\n    \"customer\":
+        \"cus_2l9bBbWh1hO30E\",\n    \"cancel_at_period_end\": false,\n    \"current_period_start\":
+        1381864563,\n    \"current_period_end\": 1384542963,\n    \"ended_at\": null,\n
+        \   \"trial_start\": null,\n    \"trial_end\": null,\n    \"canceled_at\":
+        null,\n    \"quantity\": 1,\n    \"application_fee_percent\": null\n  },\n
+        \ \"discount\": null,\n  \"account_balance\": 0,\n  \"cards\": {\n    \"object\":
+        \"list\",\n    \"count\": 1,\n    \"url\": \"/v1/customers/cus_2l9bBbWh1hO30E/cards\",\n
+        \   \"data\": [\n      {\n        \"id\": \"card_102l9b2Q662YjSqnkdT82b5C\",\n
+        \       \"object\": \"card\",\n        \"last4\": \"4242\",\n        \"type\":
+        \"Visa\",\n        \"exp_month\": 7,\n        \"exp_year\": 2016,\n        \"fingerprint\":
+        \"RIfLSrcbOjUrHlZH\",\n        \"customer\": \"cus_2l9bBbWh1hO30E\",\n        \"country\":
+        \"US\",\n        \"name\": null,\n        \"address_line1\": null,\n        \"address_line2\":
+        null,\n        \"address_city\": null,\n        \"address_state\": null,\n
+        \       \"address_zip\": null,\n        \"address_country\": null,\n        \"cvc_check\":
+        \"pass\",\n        \"address_line1_check\": null,\n        \"address_zip_check\":
+        null\n      }\n    ]\n  },\n  \"default_card\": \"card_102l9b2Q662YjSqnkdT82b5C\"\n}\n"
     http_version: 
-  recorded_at: Sat, 05 Oct 2013 22:01:25 GMT
+  recorded_at: Tue, 15 Oct 2013 19:16:05 GMT
 recorded_with: VCR 2.6.0

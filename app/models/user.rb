@@ -33,4 +33,8 @@ include Tokenable
   def can_follow?(another_user)
     !(self.follows?(another_user) || self == another_user)
   end
+
+  def deactivate!
+    update_column(:active, false)
+  end
 end
